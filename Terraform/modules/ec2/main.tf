@@ -8,6 +8,13 @@ resource "aws_security_group" "Proj_Shahmir_instance_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -62,6 +69,10 @@ resource "aws_instance" "Proj_Shahmir_Ec2_Instance" {
 
   tags = {
     Name = "Proj_Shahmir_Ec2_Instance"
+  }
+
+  provisioner "local-exec" {
+    command = "asnible-playbook -i '${aws_instance.Proj_Shahmir_Ec2_Instance.public_ip},' --user ubuntu --private-key=~/.ssh/id_rsa ansible/playbook.yml "
   }
 
  
