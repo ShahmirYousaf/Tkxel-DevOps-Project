@@ -10,13 +10,39 @@
           - docker.io
           - python3-pip
         state: present
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    - name: Add user to the docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
     - name: Install Docker Compose
-      pip:
+      apt:
         name: docker-compose
         state: present
-        executable: pip3
     - name: Check Docker version
       command: docker --version
       register: docker_version_output
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+    - name: Install Node.js and npm
+      shell: |
+        curl -sL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+    - name: Install necessary npm packages globally
+      npm:
+        name: pm2
+        global: yes
     - debug:
         msg: "Docker version is {{ docker_version_output.stdout }}"
+    
