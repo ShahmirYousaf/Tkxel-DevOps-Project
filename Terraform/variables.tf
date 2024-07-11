@@ -35,14 +35,14 @@ variable "ami" {
 #   default = "~/.ssh/id_rsa"
 # }
 
-variable "ACCESS_KEY" {
-  description = "AWS access key"
-  type        = string
-  sensitive   = true
-}
+# variable "ACCESS_KEY" {
+#   description = "AWS access key"
+#   type        = string
+#   sensitive   = true
+# }
 
-variable "SECRET_KEY" {
-  description = "AWS secret key"
-  type        = string
-  sensitive   = true
-}
+# variable "SECRET_KEY" {
+#   description = "AWS secret key"
+#   type        = string
+#   sensitive   = true
+# }
