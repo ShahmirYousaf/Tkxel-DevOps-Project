@@ -25,10 +25,15 @@ variable "ami" {
 
 
 
-variable "public_key_path" {
-  description = "The path to your public key for SSH access"
-  default     = "~/.ssh/id_rsa.pub"
-}
+# variable "public_key_path" {
+#   description = "The path to your public key for SSH access"
+#   default     = "~/.ssh/id_rsa.pub"
+# }
+
+# variable "private_key_path" {
+#   description = "The path to your private key for SSH access"
+#   default = "~/.ssh/id_rsa"
+# }
 
 variable "ACCESS_KEY" {
   description = "AWS access key"

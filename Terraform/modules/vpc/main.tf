@@ -36,3 +36,4 @@ resource "aws_route_table_association" "Proj_Shahmir_Subnet_Association" {
     route_table_id = aws_route_table.Proj_Shahmir_Route_Table.id
 
 }
+
