@@ -55,4 +55,9 @@
         global: yes
     - debug:
         msg: "Docker version is {{ docker_version_output.stdout }}"
-    
+    - name: Copy Docker Compose file
+      copy:
+        src: docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml
+    - name: Run Docker Compose
+      command: docker-compose -f /home/ubuntu/docker-compose.yml up -d
