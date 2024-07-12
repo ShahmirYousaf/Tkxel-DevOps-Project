@@ -27,16 +27,11 @@
       apt:
         name: docker-compose
         state: present
-    - name: Create directory for Docker Compose
-      ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.docker/cli-plugins/"
-        state: directory
-        mode: '0755'
-    - name: Download Docker Compose
-      ansible.builtin.get_url:
-        url: "https://github.com/docker/compose/releases/download/v2.28.1/docker-compose-linux-x86_64"
-        dest: "{{ ansible_env.HOME }}/.docker/cli-plugins/docker-compose"
-        mode: '0755'
+    - name: Install Docker Compose CLI plugin
+      shell: |
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     - name: Check Docker version
       command: docker --version
       register: docker_version_output
